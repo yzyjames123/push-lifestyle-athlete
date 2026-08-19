@@ -56,6 +56,45 @@ if (!html.includes('mobile-accordion-v10')) {
   </style>`);
 }
 
+if (!html.includes('mobile-accordion-v11')) {
+  html = html.replace('</style>', `    /* mobile-accordion-v11 */
+    @media (max-width: 680px) {
+      #schedule-modal:checked ~ .schedule-table-wrap,
+      #packages-modal:checked ~ .pricing-matrix {
+        max-width: 100vw;
+        height: 100dvh;
+        max-height: 100dvh;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        touch-action: pan-x pan-y;
+      }
+      #packages-modal:checked ~ .pricing-matrix {
+        padding-bottom: 64px;
+      }
+      #packages-modal:checked ~ .pricing-matrix::after {
+        content: "Swipe sideways to compare contract lengths. Scroll down for more plans.";
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 12px;
+        z-index: 3;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(21, 24, 29, .92);
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+        pointer-events: none;
+      }
+      #packages-modal:checked ~ .pricing-matrix .modal-head {
+        width: calc(100vw - 32px);
+      }
+    }
+  </style>`);
+}
+
 html = html.replace(
   `<details class="schedule-tab"><summary><strong>Weekend</strong><span>09:00 Saturday and Sunday</span><em>2</em></summary><div class="tab-panel"><div class="day-session"><time>Sat 09:00</time><div><strong>Functional Fitness</strong><span>12 pers · Vivian</span></div></div><div class="day-session"><time>Sun 09:00</time><div><strong>Functional Fitness</strong><span>12 pers</span></div></div></div></details>`,
   `<details class="schedule-tab"><summary><strong>Sat</strong><span>09:00 Functional Fitness</span><em>1</em></summary><div class="tab-panel"><div class="day-session"><time>09:00</time><div><strong>Functional Fitness</strong><span>12 pers · Vivian</span></div></div></div></details>\n          <details class="schedule-tab"><summary><strong>Sun</strong><span>09:00 Functional Fitness</span><em>1</em></summary><div class="tab-panel"><div class="day-session"><time>09:00</time><div><strong>Functional Fitness</strong><span>12 pers</span></div></div></div></details>`
