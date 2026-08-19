@@ -157,6 +157,35 @@ if (!html.includes('mobile-accordion-v12')) {
   </style>`);
 }
 
+if (!html.includes('mobile-accordion-v13')) {
+  html = html.replace('</style>', `    /* mobile-accordion-v13 */
+    @media (max-width: 680px) {
+      #schedule-modal:checked ~ .schedule-table-wrap::before {
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 74px;
+        bottom: 0;
+        z-index: 6;
+        width: 16px;
+        background: rgba(21, 24, 29, .98);
+        pointer-events: none;
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap .modal-head strong::after {
+        content: "Swipe days left and right";
+        display: block;
+        margin-top: 5px;
+        color: var(--lime);
+        font-family: Archivo, system-ui, sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        line-height: 1;
+      }
+    }
+  </style>`);
+}
+
 html = html.replace(
   `<details class="schedule-tab"><summary><strong>Weekend</strong><span>09:00 Saturday and Sunday</span><em>2</em></summary><div class="tab-panel"><div class="day-session"><time>Sat 09:00</time><div><strong>Functional Fitness</strong><span>12 pers · Vivian</span></div></div><div class="day-session"><time>Sun 09:00</time><div><strong>Functional Fitness</strong><span>12 pers</span></div></div></div></details>`,
   `<details class="schedule-tab"><summary><strong>Sat</strong><span>09:00 Functional Fitness</span><em>1</em></summary><div class="tab-panel"><div class="day-session"><time>09:00</time><div><strong>Functional Fitness</strong><span>12 pers · Vivian</span></div></div></div></details>\n          <details class="schedule-tab"><summary><strong>Sun</strong><span>09:00 Functional Fitness</span><em>1</em></summary><div class="tab-panel"><div class="day-session"><time>09:00</time><div><strong>Functional Fitness</strong><span>12 pers</span></div></div></div></details>`
