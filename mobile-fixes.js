@@ -4,8 +4,8 @@ const path = require('path');
 const outputPath = path.join(__dirname, 'public', 'index.html');
 let html = fs.readFileSync(outputPath, 'utf8');
 
-if (!html.includes('mobile-accordion-v9')) {
-  html = html.replace('</style>', `    /* mobile-accordion-v9 */
+if (!html.includes('mobile-accordion-v10')) {
+  html = html.replace('</style>', `    /* mobile-accordion-v10 */
     @media (max-width: 680px) {
       .hero p,
       .hero-actions .btn-secondary { display: none; }
@@ -25,6 +25,14 @@ if (!html.includes('mobile-accordion-v9')) {
       .plan-tab[open] summary::after { content: "-"; }
       .plan-tab span,
       .plan-tab small { grid-column: 1 / -1; }
+      .option-row em {
+        color: var(--lime);
+        font-style: normal;
+        font-weight: 800;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .option-row small { grid-column: 1 / -1; color: var(--faint); }
       #schedule-modal:checked ~ .schedule-table-wrap::after {
         content: "Swipe sideways for more days. Scroll down for evening classes.";
         position: fixed;
@@ -60,5 +68,19 @@ for (const row of [
 ]) {
   html = html.replace(row, '');
 }
+
+const replacements = [
+  ['<div class="option-row"><div><strong>Standard · 3 mo</strong><span>€105/mo · €13.13 per session</span></div><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Plus 3 mo</a></div>', '<div class="option-row"><strong>Standard · 3 mo</strong><em>€105/mo</em><small>€13.13 per session</small><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Standard</a></div>'],
+  ['<div class="option-row"><div><strong>Intermediate · 12 mo</strong><span>€95/mo · €11.86 per session</span></div><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Plus 12 mo</a></div>', '<div class="option-row"><strong>Intermediate · 12 mo</strong><em>€95/mo</em><small>€11.86 per session</small><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Intermediate</a></div>'],
+  ['<div class="option-row"><div><strong>Best value · 24 mo</strong><span>€90/mo · €11.25 per session</span></div><a class="btn btn-primary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Plus 24 mo</a></div>', '<div class="option-row"><strong>Best value · 24 mo</strong><em>€90/mo</em><small>€11.25 per session</small><a class="btn btn-primary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Best Value</a></div>'],
+  ['<div class="option-row"><div><strong>Standard · 3 mo</strong><span>€115/mo · €9.58 per session</span></div><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Triple 3 mo</a></div>', '<div class="option-row"><strong>Standard · 3 mo</strong><em>€115/mo</em><small>€9.58 per session</small><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Standard</a></div>'],
+  ['<div class="option-row"><div><strong>Intermediate · 12 mo</strong><span>€105/mo · €8.75 per session</span></div><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Triple 12 mo</a></div>', '<div class="option-row"><strong>Intermediate · 12 mo</strong><em>€105/mo</em><small>€8.75 per session</small><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Intermediate</a></div>'],
+  ['<div class="option-row"><div><strong>Best value · 24 mo</strong><span>€100/mo · €8.33 per session</span></div><a class="btn btn-primary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Triple 24 mo</a></div>', '<div class="option-row"><strong>Best value · 24 mo</strong><em>€100/mo</em><small>€8.33 per session</small><a class="btn btn-primary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Best Value</a></div>'],
+  ['<div class="option-row"><div><strong>Standard · 3 mo</strong><span>€125/mo · €7.81 per session</span></div><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Unlimited 3 mo</a></div>', '<div class="option-row"><strong>Standard · 3 mo</strong><em>€125/mo</em><small>€7.81 per session</small><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Standard</a></div>'],
+  ['<div class="option-row"><div><strong>Intermediate · 12 mo</strong><span>€115/mo · €7.19 per session</span></div><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Unlimited 12 mo</a></div>', '<div class="option-row"><strong>Intermediate · 12 mo</strong><em>€115/mo</em><small>€7.19 per session</small><a class="btn btn-secondary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Intermediate</a></div>'],
+  ['<div class="option-row"><div><strong>Best value · 24 mo</strong><span>€110/mo · €6.88 per session</span></div><a class="btn btn-primary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Unlimited 24 mo</a></div>', '<div class="option-row"><strong>Best value · 24 mo</strong><em>€110/mo</em><small>€6.88 per session</small><a class="btn btn-primary" href="https://push.gotgrib.nl/member/selfservice/registration/inschrijven?subscriptionId=8933" target="_blank" rel="noopener">Buy Best Value</a></div>']
+];
+
+for (const [from, to] of replacements) html = html.replace(from, to);
 
 fs.writeFileSync(outputPath, html);
