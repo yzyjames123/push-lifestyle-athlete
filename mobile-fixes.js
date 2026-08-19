@@ -4,9 +4,11 @@ const path = require('path');
 const outputPath = path.join(__dirname, 'public', 'index.html');
 let html = fs.readFileSync(outputPath, 'utf8');
 
-if (!html.includes('mobile-accordion-v7')) {
-  html = html.replace('</style>', `    /* mobile-accordion-v7 */
+if (!html.includes('mobile-accordion-v8')) {
+  html = html.replace('</style>', `    /* mobile-accordion-v8 */
     @media (max-width: 680px) {
+      .hero p,
+      .hero-actions .btn-secondary { display: none; }
       .schedule-tab summary { grid-template-columns: 64px 1fr auto 20px; }
       .plan-tab summary { grid-template-columns: 1fr auto 20px; gap: 8px 12px; }
       .schedule-tab summary::after,
