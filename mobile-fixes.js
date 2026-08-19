@@ -95,6 +95,68 @@ if (!html.includes('mobile-accordion-v11')) {
   </style>`);
 }
 
+if (!html.includes('mobile-accordion-v12')) {
+  html = html.replace('</style>', `    /* mobile-accordion-v12 */
+    @media (max-width: 680px) {
+      #schedule-modal:checked ~ .schedule-table-wrap {
+        border: 0;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap::after {
+        content: "Swipe horizontally for more days. Scroll vertically for later classes.";
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap table {
+        min-width: 760px;
+        table-layout: fixed;
+        background: var(--panel);
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap th,
+      #schedule-modal:checked ~ .schedule-table-wrap td {
+        width: 96px;
+        height: 78px;
+        padding: 7px;
+        background-color: var(--panel);
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap th {
+        position: sticky;
+        top: 63px;
+        z-index: 3;
+        height: 42px;
+        font-size: 13px;
+        background: #21354f;
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap th:first-child,
+      #schedule-modal:checked ~ .schedule-table-wrap td:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 4;
+        width: 82px;
+        min-width: 82px;
+        max-width: 82px;
+        font-size: 12px;
+        background: #1c2d43;
+        box-shadow: 1px 0 0 var(--line);
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap th:first-child {
+        z-index: 5;
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap .class-card {
+        min-height: 52px;
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 13px;
+        line-height: 1.15;
+        box-shadow: none;
+      }
+      #schedule-modal:checked ~ .schedule-table-wrap .class-card small {
+        margin-top: 3px;
+        font-size: 11px;
+      }
+    }
+  </style>`);
+}
+
 html = html.replace(
   `<details class="schedule-tab"><summary><strong>Weekend</strong><span>09:00 Saturday and Sunday</span><em>2</em></summary><div class="tab-panel"><div class="day-session"><time>Sat 09:00</time><div><strong>Functional Fitness</strong><span>12 pers · Vivian</span></div></div><div class="day-session"><time>Sun 09:00</time><div><strong>Functional Fitness</strong><span>12 pers</span></div></div></div></details>`,
   `<details class="schedule-tab"><summary><strong>Sat</strong><span>09:00 Functional Fitness</span><em>1</em></summary><div class="tab-panel"><div class="day-session"><time>09:00</time><div><strong>Functional Fitness</strong><span>12 pers · Vivian</span></div></div></div></details>\n          <details class="schedule-tab"><summary><strong>Sun</strong><span>09:00 Functional Fitness</span><em>1</em></summary><div class="tab-panel"><div class="day-session"><time>09:00</time><div><strong>Functional Fitness</strong><span>12 pers</span></div></div></div></details>`
