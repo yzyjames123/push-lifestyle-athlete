@@ -116,15 +116,10 @@
       line-height: .9;
       text-transform: uppercase;
     }
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border: 2px solid var(--lime);
-      color: var(--lime);
-      border-radius: var(--radius);
-      font-size: 24px;
+    .brand-logo {
+      width: auto;
+      height: 56px;
+      object-fit: contain;
     }
     .nav-links {
       display: flex;
@@ -181,27 +176,6 @@
     }
     .hero p { max-width: 650px; margin: 0; color: var(--muted); font-size: 18px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      margin-top: 30px;
-      max-width: 780px;
-      border: 1px solid var(--line);
-      background: var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .hero-stat { background: rgba(32,36,42,.8); padding: 18px; }
-    .hero-stat strong {
-      display: block;
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: 34px;
-      line-height: .9;
-      color: var(--lime);
-    }
-    .hero-stat span { color: var(--faint); font-size: 13px; }
-
     section { padding: 96px 0; }
     .section-head {
       display: flex;
@@ -212,32 +186,6 @@
     }
     .section-head p { max-width: 520px; color: var(--muted); margin: 0; }
     .band { background: rgba(255,255,255,.035); border-block: 1px solid var(--line); }
-    .quick-links {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: -28px;
-      position: relative;
-      z-index: 3;
-    }
-    .quick-link {
-      min-height: 128px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 22px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .quick-link span { color: var(--faint); font-size: 13px; }
-    .quick-link strong {
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: 28px;
-      text-transform: uppercase;
-    }
-
     .program-grid, .package-grid, .coach-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -453,6 +401,45 @@
       flex-wrap: wrap;
     }
 
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .8fr .8fr 1.1fr;
+      grid-auto-rows: 235px;
+      gap: 8px;
+    }
+    .gallery-item {
+      margin: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #111318;
+      border: 1px solid var(--line);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      background: var(--lime);
+      color: #111318;
+      border-radius: var(--radius);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      line-height: .86;
+      text-transform: uppercase;
+    }
+    .gallery-tile small {
+      font-size: 13px;
+      letter-spacing: .16em;
+      line-height: 1;
+    }
+
     .coach-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .coach-card { overflow: hidden; }
     .coach-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #111318; }
@@ -538,7 +525,11 @@
       .brand span:last-child { display: none; }
       .hero { min-height: 680px; padding: 72px 0 44px; }
       .hero-actions .btn { width: 100%; }
-      .hero-stats, .quick-links, .program-grid, .package-grid, .coach-grid, .mobile-schedule { grid-template-columns: 1fr; }
+      .brand-logo { height: 42px; }
+      .program-grid, .package-grid, .coach-grid, .mobile-schedule { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+      .gallery-item.tall { grid-row: span 2; }
+      .gallery-tile { padding: 18px; font-size: 34px; }
       section { padding: 72px 0; }
       .package-card { grid-template-columns: 1fr; }
       .package-card .price { font-size: 48px; }
@@ -552,8 +543,7 @@
   <nav class="site-nav">
     <div class="nav-inner">
       <a class="brand" href="#home" aria-label="Push Lifestyle x Athlete home">
-        <span class="brand-mark">P</span>
-        <span>Push Lifestyle<br><span class="accent">x Athlete</span></span>
+        <img class="brand-logo" src="https://horizons-cdn.hostinger.com/74513033-eb25-4ac9-ad8c-af8204800ef2/0e6c99081c5e26795041167ebf07ec37.png" alt="Push Lifestyle x Athlete">
       </a>
       <input class="menu-toggle" id="menu-toggle" type="checkbox" aria-label="Open navigation">
       <label class="menu-button" for="menu-toggle">Menu</label>
@@ -562,6 +552,7 @@
         <a href="#programs">Programs</a>
         <a href="#schedule">Schedule</a>
         <a href="#pricing">Packages</a>
+        <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
       </div>
       <a class="btn btn-primary nav-cta" href="https://push.gotgrib.nl/member/selfservice/registration/proefles" target="_blank" rel="noopener">Book Trial</a>
@@ -580,19 +571,8 @@
           <a class="btn btn-secondary" href="#schedule">View Schedule</a>
           <a class="btn btn-secondary" href="#pricing">Compare Packages</a>
         </div>
-        <div class="hero-stats" aria-label="Training overview">
-          <div class="hero-stat"><strong>7</strong><span>days of training options</span></div>
-          <div class="hero-stat"><strong>3</strong><span>membership frequencies</span></div>
-          <div class="hero-stat"><strong>€17,50</strong><span>single session</span></div>
-        </div>
       </div>
     </section>
-
-    <div class="wrap quick-links">
-      <a class="quick-link" href="#pricing"><span>Start here</span><strong>Packages</strong></a>
-      <a class="quick-link" href="#schedule"><span>Plan your week</span><strong>Timetable</strong></a>
-      <a class="quick-link" href="#contact"><span>Need help?</span><strong>Contact</strong></a>
-    </div>
 
     <section id="programs">
       <div class="wrap">
@@ -857,11 +837,31 @@
       </div>
     </section>
 
+    <section class="band" id="gallery">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">04 · Life at Push</div>
+            <h2>Inside the gym floor.</h2>
+          </div>
+          <p>Real training energy, coaches, and athletes. The gallery breaks up the pricing-heavy page and gives the brand more personality.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item tall"><img src="https://horizons-cdn.hostinger.com/74513033-eb25-4ac9-ad8c-af8204800ef2/78bf9ad11bd408ba9ddeaa8b62e191c1.jpg" alt="Push Lifestyle gym floor"></figure>
+          <figure class="gallery-item"><img src="https://horizons-cdn.hostinger.com/74513033-eb25-4ac9-ad8c-af8204800ef2/27508d3e108bf6b456b031349eed46cc.jpg" alt="Push athlete training"></figure>
+          <figure class="gallery-item"><img src="https://horizons-cdn.hostinger.com/74513033-eb25-4ac9-ad8c-af8204800ef2/391a449f26e1aa288b7a3997a5d0c443.jpg" alt="Push group workout"></figure>
+          <figure class="gallery-item tall"><img src="https://horizons-cdn.hostinger.com/74513033-eb25-4ac9-ad8c-af8204800ef2/c8fb3ce6a46bea9c697d5db904f415f5.jpg" alt="Push athlete portrait"></figure>
+          <figure class="gallery-item"><img src="https://horizons-cdn.hostinger.com/74513033-eb25-4ac9-ad8c-af8204800ef2/3f5a512cbd5a853337001027e96bc600.jpg" alt="Push training session"></figure>
+          <div class="gallery-tile"><span>Push<br>harder.</span><small>@push.athlete</small></div>
+        </div>
+      </div>
+    </section>
+
     <section class="band">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="eyebrow">04 · Coaches</div>
+            <div class="eyebrow">05 · Coaches</div>
             <h2>The people on the floor.</h2>
           </div>
           <p>Coach names are surfaced in the timetable and reinforced here so visitors know who they will meet.</p>
@@ -891,7 +891,7 @@
       <div class="wrap">
         <div class="section-head">
           <div>
-            <div class="eyebrow">05 · Contact</div>
+            <div class="eyebrow">06 · Contact</div>
             <h2>Book your first session.</h2>
           </div>
           <p>Clear navigation ends with one decision: book a trial session or contact the team for help choosing a package.</p>
