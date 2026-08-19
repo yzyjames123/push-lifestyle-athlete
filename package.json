@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node build.js && node mobile-fixes.js"
+    "build": "node build.js && node mobile-fixes.js && node -e \"const fs=require('fs');const p='public/index.html';let h=fs.readFileSync(p,'utf8');if(!h.includes('mobile-pricing-affordance-v1')){h=h.replace('</style>','    /* mobile-pricing-affordance-v1 */\\n    @media (max-width: 680px) {\\n      .plan-tab summary { grid-template-columns: 1fr auto; gap: 8px 12px; }\\n      .plan-tab summary::after { content: \\\"See all options\\\"; grid-column: 1 / -1; min-height: 38px; display: inline-flex; align-items: center; justify-content: center; margin-top: 4px; border: 1px solid var(--line-strong); border-radius: var(--radius); color: var(--text); background: rgba(255,255,255,.055); font-family: \\\"Barlow Condensed\\\", sans-serif; font-size: 14px; font-weight: 800; letter-spacing: .12em; line-height: 1; text-transform: uppercase; }\\n      .plan-tab[open] summary::after { content: \\\"Hide options\\\"; border-color: rgba(212, 214, 79, .48); color: #111318; background: var(--lime); }\\n      .plan-tab span { color: rgba(244, 242, 236, .9); font-size: 13px; font-weight: 650; }\\n      .plan-tab small { color: rgba(244, 242, 236, .74); font-size: 13px; line-height: 1.35; }\\n    }\\n  </style>')}fs.writeFileSync(p,h)\""
   }
 }
