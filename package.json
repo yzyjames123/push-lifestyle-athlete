@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "echo static site ready"
+    "build": "mkdir -p public && cp index.html public/index.html"
   }
 }
