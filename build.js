@@ -19,6 +19,32 @@ if (!html.includes('.contact-list')) {
   );
 }
 
+if (!html.includes('mobile-compact-v2')) {
+  html = html.replace(
+    '</style>',
+    `    /* mobile-compact-v2 */\n    .day-card summary {\n      list-style: none;\n      cursor: pointer;\n      padding: 18px;\n      background: rgba(255,255,255,.04);\n      font-family: "Barlow Condensed", sans-serif;\n      font-size: 28px;\n      font-weight: 800;\n      line-height: 1;\n      text-transform: uppercase;\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      gap: 14px;\n    }\n    .day-card summary::-webkit-details-marker { display: none; }\n    .day-card summary::after { content: "+"; color: var(--lime); font-size: 24px; line-height: 1; }\n    .day-card[open] summary::after { content: "-"; }\n    .day-count {\n      color: var(--muted);\n      font-family: Archivo, system-ui, sans-serif;\n      font-size: 12px;\n      font-weight: 800;\n      text-transform: none;\n    }\n\n    @media (max-width: 680px) {\n      h1 { font-size: clamp(50px, 16vw, 72px); }\n      h2 { font-size: clamp(38px, 12vw, 52px); }\n      h3 { font-size: 26px; }\n      .hero { min-height: 560px; padding: 58px 0 38px; }\n      .hero-content { gap: 20px; }\n      .hero p { font-size: 16px; }\n      .hero-actions { gap: 10px; }\n      .hero-actions .btn { width: 100%; min-height: 44px; }\n      .program-grid, .coach-grid, .mobile-schedule { gap: 10px; }\n      .program-card { min-height: auto; padding: 18px; gap: 12px; }\n      .program-card h3 { font-size: 24px; }\n      .pill { padding: 6px 9px; }\n      section { padding: 56px 0; }\n      .section-head { gap: 14px; margin-bottom: 24px; }\n      .section-head p { font-size: 14px; }\n      .schedule-tools { margin-bottom: 16px; }\n      .schedule-tools .btn { width: 100%; }\n      .legend { gap: 7px; }\n      .legend span { font-size: 11px; }\n      .day-card summary { padding: 14px 16px; font-size: 24px; }\n      .day-session { grid-template-columns: 64px 1fr; padding: 10px 16px; gap: 10px; }\n      .day-session time, .day-session span { font-size: 12px; }\n      .day-session strong { font-size: 14px; }\n      .package-grid { gap: 10px; margin-bottom: 18px; }\n      .package-card { grid-template-columns: 1fr auto; padding: 16px; gap: 12px; align-items: center; }\n      .package-card p { display: none; }\n      .package-card .price { font-size: 40px; }\n      .package-card .btn { min-height: 40px; margin-top: 10px; padding: 10px 12px; font-size: 13px; }\n      .pricing-row { margin-bottom: 12px; }\n      .pricing-cell { min-height: auto; padding: 14px 16px; }\n      .tier-name { gap: 3px; background: rgba(255,255,255,.045); }\n      .tier-name strong { font-size: 28px; }\n      .pricing-cell:not(.tier-name) {\n        display: grid;\n        grid-template-columns: 1fr auto;\n        align-items: center;\n        gap: 6px 12px;\n      }\n      .pricing-cell .tag { margin-bottom: 0; font-size: 15px; }\n      .monthly { font-size: 36px; grid-row: span 2; }\n      .pricing-cell .sub { font-size: 12px; }\n      .buy-link { grid-column: 1 / -1; min-height: 38px; margin-top: 6px; padding: 9px 10px; }\n      .pricing-actions { margin-top: 14px; }\n      .pricing-actions .btn { width: 100%; }\n    }\n  </style>`
+  );
+}
+
+if (!html.includes('class="day-card" open')) {
+  const dayReplacements = [
+    ['<article class="day-card">\n            <h3>Monday</h3>', '<details class="day-card" open>\n            <summary>Monday <span class="day-count">6 sessions</span></summary>'],
+    ['<article class="day-card">\n            <h3>Tuesday</h3>', '<details class="day-card">\n            <summary>Tuesday <span class="day-count">3 sessions</span></summary>'],
+    ['<article class="day-card">\n            <h3>Wednesday</h3>', '<details class="day-card">\n            <summary>Wednesday <span class="day-count">5 sessions</span></summary>'],
+    ['<article class="day-card">\n            <h3>Thursday</h3>', '<details class="day-card">\n            <summary>Thursday <span class="day-count">3 sessions</span></summary>'],
+    ['<article class="day-card">\n            <h3>Friday</h3>', '<details class="day-card">\n            <summary>Friday <span class="day-count">5 sessions</span></summary>'],
+    ['<article class="day-card">\n            <h3>Saturday</h3>', '<details class="day-card">\n            <summary>Saturday <span class="day-count">1 session</span></summary>'],
+    ['<article class="day-card">\n            <h3>Sunday</h3>', '<details class="day-card">\n            <summary>Sunday <span class="day-count">1 session</span></summary>']
+  ];
+
+  for (const [from, to] of dayReplacements) {
+    html = html.replace(from, to);
+  }
+
+  html = html.replaceAll('          </article>\n          <details class="day-card"', '          </details>\n          <details class="day-card"');
+  html = html.replace('          </article>\n        </div>\n      </div>\n    </section>\n\n    <section id="pricing">', '          </details>\n        </div>\n      </div>\n    </section>\n\n    <section id="pricing">');
+}
+
 if (!html.includes('aria-label="Push contact details"')) {
   html = html.replace(
     `            <h3>PUSH</h3>\n            <p>High-performance group training in Den Haag with structured classes, open gym options and practical membership packages.</p>\n            <div class="hero-actions">`,
